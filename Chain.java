@@ -1,25 +1,59 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 public class Chain {
-
+                   private       int commandInt=1;
+                   private       int prevHash;
+                   private       Block Block$[] = new Block[99999];
+                   private       int blockNumber=1;
 	ArrayList<Block> blockChain = new ArrayList<>();
-	public static void main(String[] args) {
-		
+	public void main(String[] args) {
+	    
+	       Scanner sc = new Scanner(System.in);
 		//Created GenesisBLock
-		String[] genesisBlockData = {"Sender: Aman", "Receiver: David", "Amount: 1000"};
-		Block genesisBlock = new Block(0,genesisBlockData);
-		System.out.println("Block Hash of Genesis Block: "+ genesisBlock.getBlockHash());
-		
-		//Created Block2
-	   String[] block2Data = {"Sender: David", "Receiver: Amam","Amount: 500"};
-	   Block block2 = new Block(genesisBlock.getBlockHash(),block2Data);
-	   System.out.println("Block Hash of Block2: "+ block2.getBlockHash() );
-	   
-	   System.out.println("---------------Genesis Block and Block 2 Full Data-----------------");
-	   System.out.println("\n ****Genesis Block****");
-	   System.out.println("Data: "+ genesisBlock.getData()+"\n Block Hash: "+ genesisBlock.getBlockHash()+"\n Previous Hash: "+ genesisBlock.getPreviousHash());;
-	   System.out.println("\n ****Block2****");
-	   System.out.println("Data: "+ block2.getData()+"\n Block Hash: "+ block2.getBlockHash()+"\n Previous Hash: "+ block2.getPreviousHash());;
+		String[] genesisBlockData = {"Block Chain", " Developer: Aman Nirala", "Company: AmanSoft Developers","Version: 1.2"};
+		Block$[0] = new Block(0,genesisBlockData);
+	
+		  while(commandInt !=0)
+		  {
+		    String command;
+		    command = sc.nextLine();
+		    if(command.equalsIgnoreCase("block -c"))
+		    {
+		        prevHash = Block$[(blockNumber-1)].getBlockHash();
+		        int size;
+		        System.out.println("Enter the data array Size");
+		        size =sc.nextInt();
+		        String data [] = new String [size];
+		        for(int i=0;i<size;i++)
+		        { 
+		           System.out.println("Enter the data entity");
+		           data[i]=sc.nextLine();
+		        }
+		        Block$[blockNumber]=createBlock(data, prevHash);
+		        blockNumber++;
+		      }
+		      if(command.equalsIgnoreCase("block -p"))
+		      {
+		          for(int j = 0; j<blockNumber;j++)
+		              printData(j);
 
-	}
-
+		      }
+		      else if(command.equalsIgnoreCase("block -e"))
+		         commandInt=0;
+		      else if(command.equalsIgnoreCase("exit"))
+		          System.exit(0);
+		  }
+		    
+  }
+	
+	private Block createBlock(String [] data,int prevHash)
+	{
+	    Block$[blockNumber]=new Block(prevHash,data);
+           return Block$[blockNumber];
+  }
+   private void printData(int indexNumber)
+  {
+    System.out.println("***********************BLOCK*****************************************");
+    System.out.println("Data: "+ Block$[indexNumber].getData()+"\n Block Hash: "+ Block$[indexNumber].getBlockHash()+"\n Previous Hash: "+ Block$[indexNumber].getPreviousHash());;
+  }
 }
