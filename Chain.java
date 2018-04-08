@@ -21,18 +21,20 @@ public class Chain {
 		    {
 		        prevHash = Block$[(blockNumber-1)].getBlockHash();
 		        int size;
-		        System.out.println("Enter the data array Size");
+		        System.out.println("::::::Enter the data array Size");
 		        size =sc.nextInt();
 		        String data [] = new String [size];
 		        for(int i=0;i<size;i++)
 		        { 
-		           System.out.println("Enter the data entity");
-		           data[i]=sc.nextLine();
+		           System.out.println("::::::Enter the data entity");
+		           data[i]=sc.next();
+		           System.out.println("::::::Data accepted>>>> "+data[i]);
 		        }
 		        Block$[blockNumber]=createBlock(data, prevHash);
 		        blockNumber++;
+		        System.out.println("\n------------------Block created------------------\n");
 		      }
-		      if(command.equalsIgnoreCase("block -p"))
+		      else if(command.equalsIgnoreCase("block -p"))
 		      {
 		          for(int j = 0; j<blockNumber;j++)
 		              printData(j);
@@ -42,9 +44,10 @@ public class Chain {
 		         commandInt=0;
 		      else if(command.equalsIgnoreCase("exit"))
 		          System.exit(0);
+		      }
+		   
 		  }
-		    
-  }
+		
 	
 	private Block createBlock(String [] data,int prevHash)
 	{
@@ -53,7 +56,7 @@ public class Chain {
   }
    private void printData(int indexNumber)
   {
-    System.out.println("***********************BLOCK*****************************************");
-    System.out.println("Data: "+ Block$[indexNumber].getData()+"\n Block Hash: "+ Block$[indexNumber].getBlockHash()+"\n Previous Hash: "+ Block$[indexNumber].getPreviousHash());;
+    System.out.println("***********************BLOCK "+indexNumber+"*****************************************");
+    System.out.println("::::::Data: "+ Block$[indexNumber].getData()+"\n::::::Block Hash: "+ Block$[indexNumber].getBlockHash()+"\n::::::Previous Hash: "+ Block$[indexNumber].getPreviousHash());;
   }
 }
